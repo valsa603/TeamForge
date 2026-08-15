@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>TeamForge - Invitations</title>
+
+</head>
+
+<body>
+
+    <h1>Team Invitations</h1>
+
+    {% if invitations %}
+
+        {% for invitation in invitations %}
+
+            <div>
+
+                <h2>
+                    {{ invitation.project.title }}
+                </h2>
+
+                <p>
+                    Invited by:
+                    {{ invitation.inviter.username }}
+                </p>
+
+                <p>
+                    Status: {{ invitation.get_status_display }}
+                </p>
+
+                <form method="POST"
+                      action="{% url 'respond_invitation' invitation.id 'accepted' %}">
+
+                    {% csrf_token %}
+
+                    <button type="submit">
+                        Accept
+                    </button>
+
+                </form>
+
+                <br>
+
+                <form method="POST"
+                      action="{% url 'respond_invitation' invitation.id 'rejected' %}">
+
+                    {% csrf_token %}
+
+                    <button type="submit">
+                        Reject
+                    </button>
+
+                </form>
+
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            You have no pending invitations.
+        </p>
+
+    {% endif %}
+
+    <a href="{% url 'dashboard' %}">
+        Back to Dashboard
+    </a>
+
+</body>
+
+</html>

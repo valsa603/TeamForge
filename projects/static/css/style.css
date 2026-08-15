@@ -1,0 +1,490 @@
+/* =========================================
+   GENERAL
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #222;
+}
+
+
+/* =========================================
+   DASHBOARD
+   ========================================= */
+
+.dashboard {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 45px;
+
+    background: white;
+    border-radius: 20px;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.10);
+}
+
+.dashboard h1 {
+    color: #243b64;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.dashboard h2 {
+    color: #333;
+    font-size: 24px;
+}
+
+.dashboard p {
+    color: #777;
+    font-size: 17px;
+}
+
+
+/* Dashboard navigation */
+
+.nav-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+
+    margin-top: 35px;
+}
+
+.nav-links a {
+    display: block;
+
+    padding: 18px;
+
+    background: #eef3ff;
+    color: #243b64;
+
+    border-radius: 12px;
+
+    text-align: center;
+    text-decoration: none;
+
+    font-weight: bold;
+    font-size: 16px;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    background: #4568dc;
+    color: white;
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 18px rgba(69, 104, 220, 0.25);
+}
+
+
+/* Logout button */
+
+.nav-links .logout {
+    background: #ffecec;
+    color: #c62828;
+}
+
+.nav-links .logout:hover {
+    background: #c62828;
+    color: white;
+}
+
+
+/* =========================================
+   LOGIN PAGE
+   ========================================= */
+
+.auth-body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    background: #eef3f9;
+}
+
+.auth-container {
+    min-height: 100vh;
+
+    display: flex;
+}
+
+
+/* Left section */
+
+.auth-image {
+    width: 50%;
+    min-height: 100vh;
+
+    background: linear-gradient(
+        135deg,
+        #243b64,
+        #4568dc
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-image::before {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    top: -100px;
+    left: -100px;
+}
+
+.auth-image::after {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    bottom: -100px;
+    right: -80px;
+}
+
+.image-content {
+    max-width: 450px;
+
+    padding: 40px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.team-icon {
+    width: 80px;
+    height: 80px;
+
+    background: rgba(255,255,255,0.15);
+
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 42px;
+
+    margin-bottom: 25px;
+}
+
+.image-content h1 {
+    font-size: 48px;
+    margin: 0 0 15px;
+
+    color: white;
+}
+
+.image-content h2 {
+    font-size: 25px;
+
+    margin-bottom: 20px;
+
+    color: white;
+}
+
+.image-content p {
+    font-size: 17px;
+    line-height: 1.7;
+
+    color: rgba(255,255,255,0.85);
+
+    margin-bottom: 30px;
+}
+
+.feature {
+    margin: 15px 0;
+
+    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.feature span {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+
+/* Login section */
+
+.login-section {
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 430px;
+
+    background: white;
+
+    padding: 45px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 15px 45px rgba(0,0,0,0.12);
+}
+
+.login-logo {
+    width: 65px;
+    height: 65px;
+
+    background: #eef3ff;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+
+    margin-bottom: 20px;
+}
+
+.login-card h1 {
+    color: #243b64;
+
+    font-size: 32px;
+
+    margin-bottom: 8px;
+}
+
+.login-subtitle {
+    color: #777;
+
+    margin-bottom: 30px;
+}
+
+
+/* Login form */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+
+    color: #333;
+}
+
+.input-box {
+    display: flex;
+
+    align-items: center;
+
+    border: 1px solid #d9dfe8;
+
+    border-radius: 10px;
+
+    background: #fafbfc;
+
+    padding: 0 13px;
+
+    transition: 0.3s;
+}
+
+.input-box span {
+    font-size: 18px;
+
+    margin-right: 10px;
+}
+
+.input-box input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    padding: 14px 5px;
+
+    font-size: 15px;
+}
+
+.input-box:focus-within {
+    border-color: #4568dc;
+
+    box-shadow:
+        0 0 0 3px rgba(69,104,220,0.12);
+}
+
+
+/* Login button */
+
+.login-button {
+    width: 100%;
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 15px;
+
+    background: #4568dc;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    margin-top: 5px;
+}
+
+.login-button:hover {
+    background: #243b64;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(36,59,100,0.25);
+}
+
+
+/* Register */
+
+.register-text {
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #777;
+}
+
+.register-text a {
+    color: #4568dc;
+
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+
+/* Messages */
+
+.messages {
+    background: #fff0f0;
+
+    color: #c62828;
+
+    padding: 10px 15px;
+
+    border-radius: 8px;
+
+    margin-bottom: 15px;
+}
+
+.messages p {
+    margin: 0;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 800px) {
+
+    .auth-container {
+        flex-direction: column;
+    }
+
+    .auth-image {
+        width: 100%;
+        min-height: 350px;
+    }
+
+    .login-section {
+        width: 100%;
+        padding: 25px 15px;
+    }
+
+    .image-content {
+        padding: 30px;
+    }
+
+    .image-content h1 {
+        font-size: 38px;
+    }
+
+    .image-content h2 {
+        font-size: 21px;
+    }
+
+    .dashboard {
+        margin: 20px;
+        padding: 25px;
+    }
+
+    .dashboard h1 {
+        font-size: 30px;
+    }
+
+    .nav-links {
+        grid-template-columns: 1fr;
+    }
+}

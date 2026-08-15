@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>TeamForge - Project Workspace</title>
+</head>
+
+<body>
+
+    <h1>{{ project.title }}</h1>
+
+    <p>
+        {{ project.description }}
+    </p>
+
+    <hr>
+
+    <h2>Project Details</h2>
+
+    <p>
+        <strong>Owner:</strong>
+        {{ project.creator.username }}
+    </p>
+
+    <p>
+        <strong>Team Size:</strong>
+        {{ members|length }} / {{ project.team_size }}
+    </p>
+
+    <p>
+        <strong>Deadline:</strong>
+        {{ project.deadline }}
+    </p>
+
+    <p>
+        <strong>Status:</strong>
+        {{ project.get_status_display }}
+    </p>
+
+    <hr>
+
+    <h2>Team Members</h2>
+
+    {% for member in members %}
+
+        <p>
+            👤 {{ member.username }}
+
+            {% if member == project.creator %}
+                — Project Owner
+            {% else %}
+                — Team Member
+            {% endif %}
+        </p>
+
+    {% endfor %}
+
+    <hr>
+
+    {% if request.user == project.creator %}
+
+<h3>Manage Team Members</h3>
+
+<form method="post" action="{% url 'add_member' project.id %}">
+    {% csrf_token %}
+
+    <input
+        type="text"
+        name="username"
+        placeholder="Enter username"
+        required
+    >
+
+    <button type="submit">Add Member</button>
+</form>
+
+{% for member in members %}
+    {% if member != project.creator %}
+        <p>
+            {{ member.username }}
+
+            <a href="{% url 'remove_member' project.id member.id %}">
+                Remove
+            </a>
+        </p>
+    {% endif %}
+{% endfor %}
+
+{% endif %}
+
+    <h2>Required Skills</h2>
+
+    {% for skill in project.required_skills.all %}
+
+        <span>
+            {{ skill.name }}
+        </span>
+
+        &nbsp;
+
+    {% endfor %}
+
+    <hr>
+<h2>Project Progress</h2>
+
+<p>
+    {{ progress }}% Complete
+</p>
+
+<progress
+    value="{{ progress }}"
+    max="100">
+</progress>
+
+<p>
+    Completed:
+    {{ completed_tasks }}
+    /
+    {{ total_tasks }}
+    tasks
+</p>
+
+<hr>
+    <h2>Tasks</h2>
+
+<a href="{% url 'create_task' project.id %}">
+    + Create Task
+</a>
+
+{% if project.tasks.all %}
+
+    {% for task in project.tasks.all %}
+
+        <hr>
+
+        <h3>{{ task.title }}</h3>
+
+        <p>
+            {{ task.description }}
+        </p>
+
+        <p>
+            Assigned to:
+            {% if task.assigned_to %}
+                {{ task.assigned_to.username }}
+            {% else %}
+                Not assigned
+            {% endif %}
+        </p>
+
+        <p>
+    Status:
+    {{ task.get_status_display }}
+</p>
+
+<form method="POST"
+      action="{% url 'update_task_status' task.id %}">
+
+    {% csrf_token %}
+
+    <select name="status">
+
+        <option value="todo"
+            {% if task.status == "todo" %}selected{% endif %}>
+            To Do
+        </option>
+
+        <option value="progress"
+            {% if task.status == "progress" %}selected{% endif %}>
+            In Progress
+        </option>
+
+        <option value="completed"
+            {% if task.status == "completed" %}selected{% endif %}>
+            Completed
+        </option>
+
+    </select>
+
+    <button type="submit">
+        Update Status
+    </button>
+
+</form>
+
+<br>
+
+<a href="{% url 'edit_task' task.id %}">
+    Edit
+</a>
+
+&nbsp;&nbsp;
+
+<a href="{% url 'delete_task' task.id %}">
+    Delete
+</a>
+
+        {% if task.deadline %}
+
+            <p>
+                Deadline: {{ task.deadline }}
+            </p>
+
+        {% endif %}
+
+    {% empty %}
+
+        <p>No tasks yet.</p>
+
+    {% endfor %}
+
+{% endif %}
+
+    <br>
+
+    <a href="{% url 'project_list' %}">
+        Back to My Projects
+    </a>
+
+</body>
+
+</html>

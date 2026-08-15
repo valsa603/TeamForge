@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>TeamForge - Find Teammates</title>
+
+</head>
+
+<body>
+
+    <h1>Find Teammates</h1>
+
+    <h2>{{ project.title }}</h2>
+
+    <p>
+        Find students who have the skills required
+        for your project.
+    </p>
+
+    <hr>
+
+    <h3>Required Skills</h3>
+
+    {% for skill in project.required_skills.all %}
+
+        <span>
+            {{ skill.name }}
+        </span>
+
+        &nbsp;
+
+    {% empty %}
+
+        <p>No skills specified.</p>
+
+    {% endfor %}
+
+    <hr>
+
+    <h2>Recommended Teammates</h2>
+
+    {% if recommendations %}
+
+        {% for recommendation in recommendations %}
+
+            <div>
+
+                <h3>
+                    {{ recommendation.profile.user.username }}
+                </h3>
+
+                <p>
+                    Match:
+                    <strong>
+                        {{ recommendation.score }}%
+                    </strong>
+                </p>
+
+                <p>
+                    Matching Skills:
+                </p>
+                <form method="POST"
+      action="{% url 'send_invitation' project.id recommendation.profile.user.id %}">
+
+    {% csrf_token %}
+
+    <button type="submit">
+        Send Team Invitation
+    </button>
+
+</form>
+
+                {% for skill in recommendation.matched_skills %}
+
+                    <span>
+                        {{ skill.name }}
+                    </span>
+
+                    &nbsp;
+
+                {% endfor %}
+
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            No matching students found yet.
+        </p>
+
+        <p>
+            Ask other students to create their
+            TeamForge profiles and add their skills.
+        </p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{% url 'project_list' %}">
+        Back to My Projects
+    </a>
+
+</body>
+
+</html>

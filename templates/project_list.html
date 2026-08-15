@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>TeamForge - My Projects</title>
+
+</head>
+
+<body>
+
+    <h1>My Projects</h1>
+
+    <form method="GET">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search projects..."
+            value="{{ search_query }}"
+        >
+
+        <select name="status">
+
+            <option value="">
+                All Status
+            </option>
+
+            <option value="planning"
+                {% if status_filter == "planning" %}selected{% endif %}>
+                Planning
+            </option>
+
+            <option value="in_progress"
+                {% if status_filter == "in_progress" %}selected{% endif %}>
+                In Progress
+            </option>
+
+            <option value="completed"
+                {% if status_filter == "completed" %}selected{% endif %}>
+                Completed
+            </option>
+
+        </select>
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+    <hr>
+
+    <a href="{% url 'create_project' %}">
+        + Create New Project
+    </a>
+
+    <hr>
+
+    {% if projects %}
+
+        {% for project in projects %}
+
+            <br>
+
+            <h2>
+                {{ project.title }}
+            </h2>
+
+            <p>
+                {{ project.description }}
+            </p>
+
+            <p>
+                Team Size: {{ project.team_size }}
+            </p>
+
+            <p>
+                Deadline: {{ project.deadline }}
+            </p>
+
+            <p>
+                Status: {{ project.get_status_display }}
+            </p>
+
+            <p>
+                <a href="{% url 'match_teammates' project.id %}">
+                    🔍 Find Teammates
+                </a>
+            </p>
+
+            <p>
+                <a href="{% url 'project_workspace' project.id %}">
+                    Open Workspace
+                </a>
+            </p>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            You haven't created any projects yet.
+        </p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{% url 'dashboard' %}">
+        Back to Dashboard
+    </a>
+
+</body>
+
+</html>
