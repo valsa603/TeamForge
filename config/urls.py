@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from projects import views
-
+from accounts import views as account_views
 
 urlpatterns = [
-
     path("admin/", admin.site.urls),
+
+    path("", account_views.dashboard, name="home"),
 
     path("", include("accounts.urls")),
 
@@ -13,7 +13,4 @@ urlpatterns = [
         "projects/",
         include("projects.urls")
     ),
-
-    path("my-tasks/", views.my_tasks, name="my_tasks"),
-
 ]
