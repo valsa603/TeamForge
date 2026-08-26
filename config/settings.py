@@ -36,6 +36,13 @@ CSRF_TRUSTED_ORIGINS = [
     "https://team-forge-l5rl-iota.vercel.app",
 ]
 
+# Production security settings
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+
 
 # Application definition
 
